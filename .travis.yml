@@ -1,0 +1,30 @@
+dist: trusty
+sudo: required
+services:
+- docker
+language: java
+jdk:
+- oraclejdk8
+branches:
+  except:
+  - /^v?\d+\.\d+\.\d+/
+install: true
+script: docker login -u $ATOMIST_REPO_USER -p $ATOMIST_REPO_TOKEN $ATOMIST_DOCKER_REGISTRY
+  && bash src/main/scripts/travis-build.bash
+env:
+  global:
+  - secure: CWssi8/YJjtyzjr9eTJ7S0RThizaBEp5IOi8//huL8icVs8VXb5oxPEgI/0JyFwkxHkq2xLkzUkU+AmnJbqzbrFfPkVrqT2FuWaCGBhp6nXctSKm4GBTgIABRw/UnNR+SOg674SgPhkfu3LHZPioGxT/YEL73C+si3iCpVq0bemkuAOAMDbcJAH6yyCdeh6bwhUKEFsb5alD6iLCcl+/Tar9lR3bAJskmHIcxyrWo6pgvaXkUmYwDqohL1ffBDnds159OuO466nrfTJsGwW6l9hv/K4ehe1oetnaGvO2yz2XF4ztrH1zBzXR376MZ+M6jqvtuai7Hs5VlvcPwLXsVuJSW5lqNNv+mvbhxLHUQxCLG1CqPiqOxoLR0vb2RHiV95aIPj0Mcbb1UnCVv/aJUMNnxHI1X7zOxH+5wc0pHcxGxbXIdbLpqm0uzUlWMbsjbk3OnN4tfOq1aRFghU/ekdMy6XtUwtwVAfqlrZo09SbRLIBc7SQn0xROPegLlKsc+XRwR60UPdkVtUxYStAuio1xb18AtZhFOWkgkIc0c8Lwc1RYY67ltKTtVBxtud7iOTgCB4I3ddfix+BG67FituGeWi7SPm5oMeod/rDY+On1POFRSlf44XQWqaDEnCnDu+ZVhkaPGSVbvU9ZMqmx4UzSDQu94hyrkF5+HMuP2Jo=
+  - secure: 2dL+OK1nVFYpnDIjTAREYyDaEr631W/ex8vOHuxVtdkbVQ9apzlAuGWmM/V7++dhEdv6HhSgoDjjxnGBIUlApQFW5FlFLWAnYGXTX5HaosgfqJmDnUBTKvsEwN/JWkn8O28jTcwSI2qDlxuyQnz4G2c8/qek+LEhRv+N2mYlw0nmwCh2Pt3WCqisQH8dy3kDLvc7uT/P9la6tRTbuB672JXftfVAkZ/iEIM1bakiscE/cabz185qFHkmALekY6Le5wO0/W+WX7oULIjEfzkghoZsaWdKza/fCSbImaAn+/jwTIG+0M/VumdChZPHuBoiU7R3iG0MC3mXhwIgVB70aof+rLLcoWVz9/hFZElRKR48f/lCVobXB4tYSIOuTf9CJb77lZSmy6prsiNiCEKlex/+U3T0jCEkQF3QE0MyDe4oEkddFFUzh0wubjNo8pU2XW2eE91UTjFGhnGPkGMQpuY57C2FnR4IVrZzAgj/21fgjmimB+3xJGWga+Vvb3UZPp0ru2Bzj1+Xo0JnRCTfw4nxxPcO6uJpPUIVcJPT8HDFBNN/bNJdLuwwlapqSWve68qzqe3j2phTd3O3NFl6EFSk4wuASiwK7NBxko8fgznBaZFMF0PTo/Lc71pPNdEBIw92l7HBHRLgjyl4Iz/LVeptGqDvjp/JCk5SGxN3rCE=
+  - secure: XlWEAPDlLlc35/4uJ7m+lb3FQe/O+1Q7hhE9FkZpUmCaxxUscq7pXVD1aIMK7Gb+Nl/DHU/IHgtftC/MhWsmFjI6HZPgdGH+O99lKW4ozSF0hjZMe41s+KoERgPUz9MQPOz3I/Ta7sIT9jzSVw8tmcRCHY05wYWsc3w/Yg8gAdCDQTPV10NjGBzWJaiZ/Rx/HfgY7pEmlUfmYfXrXGCsOStKZMb3ckbCKMqoQKAMOAWmqEEmj2iRFI8PIGd8Elpw/Qf9oly7zTFj45xp5JRotTy8QfvR1++9RA6989XoW6NEydkIqMNXdzTKWXGhmtmGnaB/N+EBuKYtzJEKQi5qpw7jVejpupjtl5eqn1Q99EUTBJJ5zdlVxOlrYQH4Y40dKEGn5aWOaIbU6Y61oAhDXjiROKHP6IFlyjajOPmE3ySeRZNvg+FCLGeI+BbK23x7DRoOKlLRBamOPvIFytz1C7LmGbLr1NsnvQOglS1dSiZ8qwZ0oyjGiDOwr8YStbH2oPLvwomYtQcjvJv96SWrdbJ8RJwqcgELQ0I49dAm3HpgVGrpyZEfcseErd9RiQovC/ASuW2LVWn3rDiT5lN+IWefy4WgeNqPAGLzdmmagcrqC0ijcCpKJngwCyHywKDEXHN6Q/rzG2WV9MNlHiZQavy0Noty+Yaeb1TJiffwv24=
+  - ATOMIST_DOCKER_REGISTRY=sforzando-docker-dockerv2-local.artifactoryonline.com
+notifications:
+  email: false
+  webhooks:
+    on_success: always
+    on_failure: always
+    on_start: always
+    urls:
+    - https://webhook.atomist.com/travis
+cache:
+  directories:
+  - $HOME/.m2
