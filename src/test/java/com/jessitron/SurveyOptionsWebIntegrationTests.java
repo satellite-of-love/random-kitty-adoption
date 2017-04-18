@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = ChangeMeApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = RandomittydoptionApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class SurveyOptionsWebIntegrationTests {
 
     @Autowired
@@ -21,8 +21,8 @@ public class SurveyOptionsWebIntegrationTests {
     
     @Test
     public void surveyOptionsTest() {
-        SurveyOptions result = restTemplate.getForObject("/surveyOptions?seed=hello", SurveyOptions.class);
-        assertEquals("hello", result.getSeed());
+        SurveyOptions result = restTemplate.getForObject("/surveyOptions?seed=33", SurveyOptions.class);
+        assertEquals(33, result.getSeed());
     }
     
 }
