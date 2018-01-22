@@ -4,6 +4,8 @@
 
 This project contains a [Spring Boot][boot] [REST][rest] service for moar kitties.
 
+Never enough kitties!
+
 [boot]: https://projects.spring.io/spring-boot/
 [rest]: https://en.wikipedia.org/wiki/Representational_state_transfer
 
